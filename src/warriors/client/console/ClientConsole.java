@@ -19,6 +19,7 @@ public class ClientConsole {
 	private static String MENU_QUITTER = "2";
 
 	public static void main(String[] args) {
+
 				
 		WarriorsAPI warriors = new Warriors();
 		Scanner sc = new Scanner(System.in);
@@ -30,7 +31,7 @@ public class ClientConsole {
 			}			
 		}while(!menuChoice.equals(MENU_QUITTER));
 		sc.close();
-		System.out.println("à bientôt");
+		System.out.println("Ã  bientÃ´t");
 	}
 
 	private static void startGame(WarriorsAPI warriors, Scanner sc) {
@@ -38,7 +39,7 @@ public class ClientConsole {
 		System.out.println("Entrez votre nom:");
 		String playerName = sc.nextLine();
 		
-		System.out.println("Choisissez votre héro:");
+		System.out.println("Choisissez votre hÃ©ro:");
 		for(int i = 0; i < warriors.getHeroes().size(); i++) {
 			Hero heroe = warriors.getHeroes().get(i);
 			System.out.println(i+1 + " - " + heroe.getName());
@@ -58,7 +59,7 @@ public class ClientConsole {
 		String gameId = gameState.getGameId();
 		while (gameState.getGameStatus() == GameStatus.IN_PROGRESS) {
 			System.out.println(gameState.getLastLog());
-			System.out.println("\nAppuyer sur une touche pour lancer le dé"); 
+			System.out.println("\nAppuyer sur une touche pour lancer le dÃ©");
 			if(sc.hasNext()) {
 				sc.nextLine();
 				gameState = warriors.nextTurn(gameId);
