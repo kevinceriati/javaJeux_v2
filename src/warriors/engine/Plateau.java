@@ -4,6 +4,7 @@ import warriors.contracts.Map;
 public class Plateau implements Map {
 String name;
 int numberOfCase;
+
 public Plateau(String name, int numberOfCase){
     this.name = name;
     this.numberOfCase = numberOfCase;
