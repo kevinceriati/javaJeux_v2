@@ -57,7 +57,7 @@ public class Warriors implements WarriorsAPI {
 
         if (jeuEnCours.getCurrentCase() >= 64){
             jeuEnCours.setGameStatus(GameStatus.FINISHED);
-            jeuEnCours.setLastLog("Merci camarade, le jeu est terminer ◄◄◄◄▲ ");
+            jeuEnCours.setLastLog("Merci camarade, le jeu est terminer ◄◄◄◄ ");
         }else{
             String nomCase = ((Plateau) jeuEnCours.getMap()).getCasesList().get(jeuEnCours.getCurrentCase()).getNameCase();
             jeuEnCours.setLastLog("le dé a fait " + de + " Vous êtes maintenant case : " + jeuEnCours.getCurrentCase() +" "+ nomCase +"");

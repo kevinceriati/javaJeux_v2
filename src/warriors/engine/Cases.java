@@ -9,6 +9,7 @@ public class Cases {
         this.nameCase = nameCase;
         this.numberCase = numberCase;
         this.typeCase = typeCase;
+
     }
 
     public String getTypeCase() {

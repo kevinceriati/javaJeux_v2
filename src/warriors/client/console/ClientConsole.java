@@ -31,7 +31,7 @@ public class ClientConsole {
 			}			
 		}while(!menuChoice.equals(MENU_QUITTER));
 		sc.close();
-		System.out.println("à bientôt");
+
 	}
 
 	private static void startGame(WarriorsAPI warriors, Scanner sc) {
