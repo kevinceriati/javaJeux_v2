@@ -1,6 +1,6 @@
 package warriors.engine;
-import warriors.contracts.*;
 
+import warriors.contracts.*;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
@@ -46,7 +46,6 @@ public class Warriors implements WarriorsAPI {
 
     @Override
     public GameState nextTurn(String gameID) {
-//        State currentState = allState.get(gameID);
         //definir partie en cours
         jeuEnCours = allState.get(gameID);
 
@@ -56,16 +55,14 @@ public class Warriors implements WarriorsAPI {
         //deplacement joueur
         jeuEnCours.setCurrentCase(jeuEnCours.getCurrentCase()+de);
 
-        //log du joueur
-        jeuEnCours.setLastLog("le dé a fait " + de + " Vous êtes maintenant case : " + jeuEnCours.getCurrentCase() + "");
-
-        //condition quand passer 64
-
-        if (jeuEnCours.getCurrentCase() == 64){
+        if (jeuEnCours.getCurrentCase() >= 64){
             jeuEnCours.setGameStatus(GameStatus.FINISHED);
-            jeuEnCours.setLastLog("Merci camarade, le jeu est terminer ◄◄◄◄");
+            jeuEnCours.setLastLog("Merci camarade, le jeu est terminer ◄◄◄◄▲ ");
+        }else{
+            String nomCase = ((Plateau) jeuEnCours.getMap()).getCasesList().get(jeuEnCours.getCurrentCase()).getNameCase();
+            jeuEnCours.setLastLog("le dé a fait " + de + " Vous êtes maintenant case : " + jeuEnCours.getCurrentCase() +" "+ nomCase +"");
+            jeuEnCours.setGameStatus(GameStatus.IN_PROGRESS);
         }
-
         return jeuEnCours;
     }
 }

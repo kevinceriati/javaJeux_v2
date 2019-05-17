@@ -69,7 +69,6 @@ public class State implements GameState {
         return position;
     }
 
-
     public void setCurrentCase(int pos){
         this.position = pos;
     }
