@@ -31,6 +31,7 @@ public class ClientConsole {
 			}			
 		}while(!menuChoice.equals(MENU_QUITTER));
 		sc.close();
+		System.out.println("A bientôt jeune guerrier fougueux");
 
 	}
 

@@ -1,15 +1,16 @@
 package warriors.engine;
 
+import warriors.contracts.GameStatus;
 import warriors.contracts.Hero;
 
-public class Personnage implements Hero {
+abstract public class Personnage implements Hero {
 
     protected String name;
     protected String image;
     protected int life;
     protected int attackLevel;
 
-    public Personnage (String name, String image, int life, int attackLevel) {
+    public Personnage(String name, String image, int life, int attackLevel) {
         this.name = name;
         this.image = image;
         this.life = life;
@@ -31,7 +32,7 @@ public class Personnage implements Hero {
     }
 
     public void setImage(String image) {
-       this.image = image;
+        this.image = image;
     }
 
     @Override
@@ -43,6 +44,9 @@ public class Personnage implements Hero {
         this.life = life;
     }
 
+    abstract public void addAtk(int newAtk);
+    abstract public void addLife(int newLife);
+
     @Override
     public int getAttackLevel() {
         return this.attackLevel;
@@ -50,5 +54,11 @@ public class Personnage implements Hero {
 
     public void setAttackLevel(int attackLevel) {
         this.attackLevel = attackLevel;
+    }
+
+
+    @Override
+    public String toString() {
+        return "\n" + "Stat du Hero : " + "\n" + "Nom : " + getName() + "\n" + "Vie : " + getLife() + "\n" + "attaque : " + getAttackLevel();
     }
 }

@@ -47,6 +47,7 @@ public class Warriors implements WarriorsAPI {
     @Override
     public GameState nextTurn(String gameID) {
         //definir partie en cours
+        Plateau myPlateau = (Plateau) myMap.get(0);
         jeuEnCours = allState.get(gameID);
 
         //jet de des
@@ -59,10 +60,18 @@ public class Warriors implements WarriorsAPI {
             jeuEnCours.setGameStatus(GameStatus.FINISHED);
             jeuEnCours.setLastLog("Merci camarade, le jeu est terminer ◄◄◄◄ ");
         }else{
+            myPlateau.getCasesList().get(jeuEnCours.getCurrentCase()).applyTreatment((Personnage) jeuEnCours.getHero());
             String nomCase = ((Plateau) jeuEnCours.getMap()).getCasesList().get(jeuEnCours.getCurrentCase()).getNameCase();
-            jeuEnCours.setLastLog("le dé a fait " + de + " Vous êtes maintenant case : " + jeuEnCours.getCurrentCase() +" "+ nomCase +"");
-            jeuEnCours.setGameStatus(GameStatus.IN_PROGRESS);
+            jeuEnCours.setLastLog("le dé a fait " + de + " Vous êtes maintenant case : " + jeuEnCours.getCurrentCase() + "\n" +
+                    myPlateau.getCasesList().get(jeuEnCours.getCurrentCase()) + "\n" +
+                    jeuEnCours.getHero() );
+        }
+        if (jeuEnCours.getHero().getLife() <= 0){
+            jeuEnCours.setGameStatus(GameStatus.GAME_OVER);
+            jeuEnCours.setLastLog("Vous etes mort merci au revoir t nul");
         }
         return jeuEnCours;
     }
+
+
 }
