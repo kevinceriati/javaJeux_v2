@@ -16,9 +16,8 @@ public class Arme extends Cases {
     }
 
     @Override
-    public Personnage applyTreatment(Personnage hero) {
+    public void applyTreatment(Personnage hero) {
        hero.addAtk(getDegat());
-        return hero;
     }
 
     @Override

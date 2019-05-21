@@ -9,8 +9,7 @@ public class Neutre extends Cases {
     }
 
     @Override
-    public Personnage applyTreatment(Personnage hero) {
-        return hero;
+    public void applyTreatment(Personnage hero) {
     }
 //    @Override
 //    public String getTypeCase() {

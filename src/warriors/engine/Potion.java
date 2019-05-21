@@ -18,10 +18,8 @@ public class Potion extends Cases {
     }
 
     @Override
-    public Personnage applyTreatment(Personnage hero) {
+    public void applyTreatment(Personnage hero) {
         hero.addLife(getLife());
-
-        return hero;
     }
 
     @Override

@@ -1,6 +1,5 @@
 package warriors.engine;
 
-import warriors.contracts.GameStatus;
 import warriors.contracts.Hero;
 
 abstract public class Personnage implements Hero {
@@ -45,6 +44,7 @@ abstract public class Personnage implements Hero {
     }
 
     abstract public void addAtk(int newAtk);
+
     abstract public void addLife(int newLife);
 
     @Override

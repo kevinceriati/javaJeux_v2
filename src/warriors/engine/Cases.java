@@ -21,7 +21,9 @@ abstract public class Cases {
     public String getNameCase() {
         return nameCase;
     }
-    public abstract Personnage applyTreatment(Personnage hero);
+
+    public abstract void applyTreatment(Personnage hero);
+
     public void setNameCase(String nameCase) {
         this.nameCase = nameCase;
     }
@@ -33,6 +35,7 @@ abstract public class Cases {
 //    public void setNumberCase(int numberCase) {
 //        this.numberCase = numberCase;
 //    }
+
 
     @Override
     public String toString() {

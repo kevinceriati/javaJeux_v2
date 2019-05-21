@@ -7,7 +7,6 @@ public class Ennemi extends Cases {
         super(nameCase);
         setPa(pa);
         setPv(pv);
-
     }
 
     public int getPv() {
@@ -27,8 +26,17 @@ public class Ennemi extends Cases {
     }
 
     @Override
-    public Personnage applyTreatment(Personnage hero) {
-        return hero;
+    public void applyTreatment(Personnage hero) {
+        boolean combat = true;
+        while(combat){
+            pv -= hero.getAttackLevel();
+            if(pv > 0){
+                hero.setLife(hero.getLife()-pa);
+            }
+            if(hero.getLife() <= 0 || pv <= 0){
+                combat = false;
+            }
+        }
     }
 
     @Override
