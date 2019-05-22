@@ -1,7 +1,8 @@
 package warriors.engine;
-
+import java.io.BufferedReader;
+import java.io.FileReader;
 import warriors.contracts.*;
-
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
@@ -10,10 +11,14 @@ public class Warriors implements WarriorsAPI {
     private List<Hero> myHero;
     private List<Map> myMap;
     int warrior = 0;
+    int i = 0;
+    int de = 0;
     State jeuEnCours;
     Hashtable<String, State> allState;
+    String[] data;
 
     public Warriors() {
+        boolean isTest = false;
         Personnage test = new Magicien("Al Batar", "tete de de con", 5, 5);
         Personnage triste = new Magicien("Al Conar", "tete de cul", 5, 5);
         Personnage Yolo = new Guerrier("Ragnare le Salopare", "tete de cul", 2, 9);
@@ -24,6 +29,21 @@ public class Warriors implements WarriorsAPI {
         Plateau carte = new Plateau("Donjon de sa maman", 64);
         myMap = new ArrayList<>();
         myMap.add(carte);
+
+        if (isTest = true) {
+            BufferedReader csvReader = null;
+            String row = "";
+            try {
+                csvReader = new BufferedReader(new FileReader("./Java_Warriors_CodeDeBase/src/warriors/scenario.csv"));
+                while ((row = csvReader.readLine()) != null) {
+                    data = row.split(",");
+                }
+                csvReader.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
     }
 
     @Override
@@ -51,8 +71,6 @@ public class Warriors implements WarriorsAPI {
         Plateau myPlateau = (Plateau) myMap.get(0);
         jeuEnCours = allState.get(gameID);
 
-        //jet de des
-        int de = 1 + (int) (Math.random() * ((6 - 1) + 1));
 
         //deplacement joueur
         jeuEnCours.setCurrentCase(jeuEnCours.getCurrentCase() + de);
@@ -75,4 +93,15 @@ public class Warriors implements WarriorsAPI {
     }
 
 
+    public GameState nextTurnTest(String gameID) {
+       de = Integer.valueOf(data[i]);
+       i++;
+    return nextTurn(gameID);
+    }
+
+public GameState rollDice(String gameID){
+    //jet de des
+    de = 1 + (int) (Math.random() * ((6 - 1) + 1));
+    return nextTurn(gameID);
+}
 }

@@ -1,10 +1,6 @@
 package warriors.client.console;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
+
 
 import warriors.contracts.GameState;
 import warriors.contracts.GameStatus;
@@ -17,25 +13,32 @@ public class ClientConsole {
 	
 	private static String MENU_COMMENCER_PARTIE = "1";
 	private static String MENU_QUITTER = "2";
+	private static String MENU_PARTIE_TEST = "3";
+	private static boolean isTest = false;
 
+	/**
+	 * @param args
+	 */
 	public static void main(String[] args) {
 
-				
 		WarriorsAPI warriors = new Warriors();
 		Scanner sc = new Scanner(System.in);
 		String menuChoice = "";
 		do {
 			menuChoice = displayMenu(sc);
 			if(menuChoice.equals(MENU_COMMENCER_PARTIE)) {					
-				startGame(warriors, sc);
-			}			
+				startGame(warriors, sc, isTest);
+			} else if (menuChoice.equals(MENU_PARTIE_TEST)){
+				isTest = true;
+				startGame(warriors, sc, isTest);
+			}
 		}while(!menuChoice.equals(MENU_QUITTER));
 		sc.close();
 		System.out.println("A bientôt jeune guerrier fougueux");
 
 	}
 
-	private static void startGame(WarriorsAPI warriors, Scanner sc) {
+	private static void startGame(WarriorsAPI warriors, Scanner sc, boolean isTest) {
 		System.out.println();
 		System.out.println("Entrez votre nom:");
 		String playerName = sc.nextLine();
@@ -60,11 +63,17 @@ public class ClientConsole {
 		String gameId = gameState.getGameId();
 		while (gameState.getGameStatus() == GameStatus.IN_PROGRESS) {
 			System.out.println(gameState.getLastLog());
-			System.out.println("\nAppuyer sur une touche pour lancer le dé");
-			if(sc.hasNext()) {
-				sc.nextLine();
-				gameState = warriors.nextTurn(gameId);
-			}									
+			if (isTest){
+				gameState = ((Warriors) warriors).nextTurnTest(gameId);
+			}else {
+				System.out.println("\nAppuyer sur une touche pour lancer le dé");
+				if(sc.hasNext()) {
+					sc.nextLine();
+					gameState = ((Warriors) warriors).rollDice(gameId);
+
+				}
+			}
+
 		}
 		
 		System.out.println(gameState.getLastLog());
@@ -74,7 +83,8 @@ public class ClientConsole {
 		System.out.println();
 		System.out.println("================== Java Warriors ==================");
 		System.out.println("1 - Commencer une partie");
-		System.out.println("2 - Quitter"); 
+		System.out.println("2 - Quitter");
+		System.out.println("3 - Debug mode");
 		if(sc.hasNext()) {
 			String choice = sc.nextLine();
 			return choice;
