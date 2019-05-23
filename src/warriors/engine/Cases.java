@@ -6,37 +6,34 @@ abstract public class Cases {
  //   private int numberCase;
     protected String res;
 
+    /**
+     * @param nameCase
+     */
     public Cases (String nameCase) {
         this.nameCase = nameCase;
     }
 
-//    public String getTypeCase() {
-//        return typeCase;
-//    }
-//
-//    public void setTypeCase(String typeCase) {
-//        this.typeCase = typeCase;
-//    }
-
+    /**
+     * @return
+     */
     public String getNameCase() {
         return nameCase;
     }
 
+    /**
+     * @param hero
+     *
+     * Centralisation of every applyTreatment
+     */
     public abstract void applyTreatment(Personnage hero);
 
     public void setNameCase(String nameCase) {
         this.nameCase = nameCase;
     }
-//
-//    public int getNumberCase() {
-//        return numberCase;
-//    }
-//
-//    public void setNumberCase(int numberCase) {
-//        this.numberCase = numberCase;
-//    }
 
-
+    /**
+     * @return
+     */
     @Override
     public String toString() {
         return " Case : " + getNameCase() + "\n";

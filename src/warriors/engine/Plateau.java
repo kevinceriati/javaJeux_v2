@@ -1,7 +1,5 @@
 package warriors.engine;
 import warriors.contracts.Map;
-import warriors.engine.Neutres.Neutre;
-
 
 
 import java.util.ArrayList;
@@ -11,16 +9,27 @@ String name;
 int numberOfCase;
 private ArrayList<Cases> casesList = new ArrayList<>();
 
+    /**
+     * @param name
+     * @param numberOfCase
+     */
 public Plateau(String name, int numberOfCase){
     this.name = name;
     this.numberOfCase = numberOfCase;
     createCase();
 }
+
+    /**
+     * @return
+     */
     @Override
     public String getName() {
         return this.name;
     }
 
+    /**
+     * @return
+     */
     @Override
     public int getNumberOfCase() {
         return 0;
@@ -30,10 +39,16 @@ public Plateau(String name, int numberOfCase){
         this.numberOfCase = numberOfCase;
     }
 
+    /**
+     * @return
+     */
     public ArrayList<Cases> getCasesList() {
         return casesList;
     }
 
+    /**
+     * Board creation
+     */
     public void createCase () {
         for (int j = 0; j < 64; j++) {
             if (j == 45 || j == 52 || j == 56 || j == 62) {

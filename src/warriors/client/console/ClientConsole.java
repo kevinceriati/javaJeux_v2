@@ -1,12 +1,22 @@
 package warriors.client.console;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Scanner;
 
-
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import warriors.contracts.GameState;
 import warriors.contracts.GameStatus;
 import warriors.contracts.Hero;
 import warriors.contracts.Map;
 import warriors.contracts.WarriorsAPI;
+import warriors.engine.Cases;
+import warriors.engine.Plateau;
+import warriors.engine.Serializer;
 import warriors.engine.Warriors;
 
 public class ClientConsole {
@@ -26,8 +36,11 @@ public class ClientConsole {
 		String menuChoice = "";
 		do {
 			menuChoice = displayMenu(sc);
-			if(menuChoice.equals(MENU_COMMENCER_PARTIE)) {					
-				startGame(warriors, sc, isTest);
+			if(menuChoice.equals(MENU_COMMENCER_PARTIE)) {
+				isTest = false;
+				if (!isTest){
+					startGame(warriors, sc, isTest);
+				}
 			} else if (menuChoice.equals(MENU_PARTIE_TEST)){
 				isTest = true;
 				startGame(warriors, sc, isTest);
@@ -37,6 +50,18 @@ public class ClientConsole {
 		System.out.println("A bientôt jeune guerrier fougueux");
 
 	}
+
+	/**
+	 * @param warriors
+	 * @param sc
+	 * @param isTest
+	 *
+	 * Name choice
+	 * Hero choice
+	 * Map choice
+	 *Ongoing game
+	 *
+	 */
 
 	private static void startGame(WarriorsAPI warriors, Scanner sc, boolean isTest) {
 		System.out.println();
@@ -59,6 +84,29 @@ public class ClientConsole {
 		}
 		Map choosenMap = warriors.getMaps().get(Integer.parseInt(sc.nextLine()) - 1);
 
+		GsonBuilder builder = new GsonBuilder();
+		builder.registerTypeAdapter(Cases.class, new Serializer());
+		builder.setPrettyPrinting();
+		Gson gson = builder.create();
+		String json = gson.toJson (choosenMap);
+
+		// écriture du fichier
+
+			try {
+				Files.write(Paths.get("jsonMap.json"), json.getBytes());
+			} catch (IOException e) {
+				e.printStackTrace();
+		}
+
+		try {
+			BufferedReader bufferedReader = new BufferedReader(new FileReader("jsonMap.json"));
+			Plateau board = gson.fromJson(bufferedReader, Plateau.class);
+//			System.out.println(board.getClass());
+//			System.out.println(board.toString());
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+
 		GameState gameState = warriors.createGame(playerName, chosenHeroe, choosenMap);
 		String gameId = gameState.getGameId();
 		while (gameState.getGameStatus() == GameStatus.IN_PROGRESS) {
@@ -70,15 +118,16 @@ public class ClientConsole {
 				if(sc.hasNext()) {
 					sc.nextLine();
 					gameState = ((Warriors) warriors).rollDice(gameId);
-
 				}
 			}
-
 		}
-		
 		System.out.println(gameState.getLastLog());
 	}
 
+	/**
+	 * @param sc
+	 * @return
+	 */
 	private static String displayMenu(Scanner sc) {
 		System.out.println();
 		System.out.println("================== Java Warriors ==================");
@@ -88,8 +137,7 @@ public class ClientConsole {
 		if(sc.hasNext()) {
 			String choice = sc.nextLine();
 			return choice;
-		}		
-		
+		}
 		return "";
 	}
 }

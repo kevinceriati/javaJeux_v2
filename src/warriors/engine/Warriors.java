@@ -1,4 +1,5 @@
 package warriors.engine;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import warriors.contracts.*;
@@ -17,6 +18,10 @@ public class Warriors implements WarriorsAPI {
     Hashtable<String, State> allState;
     String[] data;
 
+    /**
+     * Creat Hero list
+     */
+
     public Warriors() {
         boolean isTest = false;
         Personnage test = new Magicien("Al Batar", "tete de de con", 5, 5);
@@ -30,6 +35,8 @@ public class Warriors implements WarriorsAPI {
         myMap = new ArrayList<>();
         myMap.add(carte);
 
+        //   Code for CSV test
+
         if (isTest = true) {
             BufferedReader csvReader = null;
             String row = "";
@@ -42,20 +49,32 @@ public class Warriors implements WarriorsAPI {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
         }
     }
+
+    /**
+     * @return
+     */
 
     @Override
     public List<Hero> getHeroes() {
         return myHero;
     }
 
+    /**
+     * @return
+     */
     @Override
     public List<Map> getMaps() {
         return myMap;
     }
 
+    /**
+     * @param playerName the name of the player
+     * @param hero       the chosen hero for the game
+     * @param map        the chosen map for the game
+     * @return Start of the game
+     */
     @Override
     public GameState createGame(String playerName, Hero hero, Map map) {
         State start = new State(playerName, hero, map, Integer.toString(warrior));
@@ -65,6 +84,11 @@ public class Warriors implements WarriorsAPI {
         return start;
     }
 
+    /**
+     * @param gameID the ID of the game
+     *               Course of the game with game rules
+     * @return current game set by State
+     */
     @Override
     public GameState nextTurn(String gameID) {
         //definir partie en cours
@@ -92,16 +116,24 @@ public class Warriors implements WarriorsAPI {
         return jeuEnCours;
     }
 
-
+    /**
+     * @param gameID
+     * @return Scenario CSV Debug mode
+     */
     public GameState nextTurnTest(String gameID) {
-       de = Integer.valueOf(data[i]);
-       i++;
-    return nextTurn(gameID);
+        de = Integer.valueOf(data[i]);
+        i++;
+        return nextTurn(gameID);
     }
 
-public GameState rollDice(String gameID){
-    //jet de des
-    de = 1 + (int) (Math.random() * ((6 - 1) + 1));
-    return nextTurn(gameID);
-}
+    /**
+     * @param gameID
+     * @return Ordinaire game with random dice
+     */
+
+    public GameState rollDice(String gameID) {
+        //jet de des
+        de = 1 + (int) (Math.random() * ((6 - 1) + 1));
+        return nextTurn(gameID);
+    }
 }
