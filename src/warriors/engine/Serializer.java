@@ -20,7 +20,7 @@ public class Serializer implements JsonSerializer<Cases>, JsonDeserializer<Cases
             JsonElement element = jsonObject.get("properties");
             try {
                 return context.deserialize(element, Class.forName("warriors.engine." + type));
-            } catch (JsonParseException e) {                                                     // message pour qur ce soit propre
+            } catch (JsonParseException e) {                                                     // message pour que ce soit propre
                 System.out.println("JsonParseException error");
             } catch (ClassNotFoundException e) {
                 System.out.println("ClassNotFoundException e error");

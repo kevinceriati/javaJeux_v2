@@ -2,7 +2,7 @@ package warriors.engine;
 
 import warriors.contracts.Hero;
 
-abstract public class Personnage implements Hero {
+abstract public class Personnage implements Hero, Cloneable {
 
     protected String name;
     protected String image;
@@ -97,4 +97,12 @@ abstract public class Personnage implements Hero {
     public String toString() {
         return "\n" + "Stat du Hero : " + "\n" + "Nom : " + getName() + "\n" + "Vie : " + getLife() + "\n" + "attaque : " + getAttackLevel();
     }
+
+    @Override
+    public Object clone()
+        throws CloneNotSupportedException
+        {
+            return super.clone();
+        }
+
 }

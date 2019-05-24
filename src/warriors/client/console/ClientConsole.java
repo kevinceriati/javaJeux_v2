@@ -84,29 +84,6 @@ public class ClientConsole {
 		}
 		Map choosenMap = warriors.getMaps().get(Integer.parseInt(sc.nextLine()) - 1);
 
-		GsonBuilder builder = new GsonBuilder();
-		builder.registerTypeAdapter(Cases.class, new Serializer());
-		builder.setPrettyPrinting();
-		Gson gson = builder.create();
-		String json = gson.toJson (choosenMap);
-
-		// écriture du fichier
-
-			try {
-				Files.write(Paths.get("jsonMap.json"), json.getBytes());
-			} catch (IOException e) {
-				e.printStackTrace();
-		}
-
-		try {
-			BufferedReader bufferedReader = new BufferedReader(new FileReader("jsonMap.json"));
-			Plateau board = gson.fromJson(bufferedReader, Plateau.class);
-//			System.out.println(board.getClass());
-//			System.out.println(board.toString());
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-
 		GameState gameState = warriors.createGame(playerName, chosenHeroe, choosenMap);
 		String gameId = gameState.getGameId();
 		while (gameState.getGameStatus() == GameStatus.IN_PROGRESS) {

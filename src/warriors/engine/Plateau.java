@@ -1,7 +1,5 @@
 package warriors.engine;
 import warriors.contracts.Map;
-
-
 import java.util.ArrayList;
 
 public class Plateau implements Map {
@@ -32,7 +30,7 @@ public Plateau(String name, int numberOfCase){
      */
     @Override
     public int getNumberOfCase() {
-        return 0;
+        return numberOfCase;
     }
 
     public void setNumberOfCase(int numberOfCase) {

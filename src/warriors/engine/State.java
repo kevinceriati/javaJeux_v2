@@ -71,6 +71,10 @@ public class State implements GameState {
         return this.hero;
     }
 
+    public void setHero(Hero hero) {
+        this.hero = hero;
+    }
+
     /**
      * @return
      */

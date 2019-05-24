@@ -20,8 +20,15 @@ public interface Hero {
 	 */
 	int getLife();
 
+	void setLife(int life);
+
 	/**
 	 * @return the attack level of the hero
 	 */
+
 	int getAttackLevel();
+
+	void setAttackLevel(int attackLevel);
+
+	Object clone() throws CloneNotSupportedException;
 }

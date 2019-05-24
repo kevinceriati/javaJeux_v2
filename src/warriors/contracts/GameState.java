@@ -24,7 +24,9 @@ public interface GameState {
 	 * @return the current hero
 	 */
 	Hero getHero();
-	
+
+	void setHero(Hero hero);
+
 	/**
 	 * @return the current map
 	 */

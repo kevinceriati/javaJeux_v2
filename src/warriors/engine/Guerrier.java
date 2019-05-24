@@ -38,9 +38,6 @@ public class Guerrier extends Personnage {
         }
     }
 
-    /**
-     * @return
-     */
     @Override
     public String toString() {
         return super.toString();
