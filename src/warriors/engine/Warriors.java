@@ -2,11 +2,9 @@ package warriors.engine;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import warriors.contracts.*;
-
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -14,7 +12,6 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.UUID;
-import java.util.concurrent.ThreadLocalRandom;
 
 public class Warriors implements WarriorsAPI {
     private List<Hero> myHero;
@@ -33,13 +30,13 @@ public class Warriors implements WarriorsAPI {
 
     public Warriors() {
         boolean isTest = false;
-        Personnage test = new Magicien("Al Batar", "tete de de con", 5, 5);
-        Personnage triste = new Magicien("Al Conar", "tete de cul", 5, 5);
-        Personnage Yolo = new Guerrier("Ragnare le Salopare", "tete de cul", 2, 9);
+//        Personnage test = new Magicien("Al Batar", "tete de de con", 5, 5);
+//        Personnage triste = new Magicien("Al Conar", "tete de cul", 5, 5);
+//        Personnage Yolo = new Guerrier("Ragnare le Salopare", "tete de cul", 2, 9);
         myHero = new ArrayList<>();
-        myHero.add(test);
-        myHero.add(triste);
-        myHero.add(Yolo);
+//        myHero.add(test);
+//        myHero.add(triste);
+//        myHero.add(Yolo);
         myMap = new ArrayList<>();
         loadMaps();
 //        writeMaps();
@@ -64,7 +61,6 @@ public class Warriors implements WarriorsAPI {
     /**
      * @return
      */
-
     @Override
     public List<Hero> getHeroes() {
         return myHero;

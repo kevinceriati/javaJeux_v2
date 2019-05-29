@@ -8,20 +8,23 @@ public class Guerrier extends Personnage {
      * @param life
      * @param attackLevel
      */
-    public Guerrier (String name, String image, int life, int attackLevel) {
-        super(name, image, life,attackLevel);
+    public Guerrier (String name, String type, String image, int attackLevel, int life) {
+        super(name, image, type, life, attackLevel);
     }
+
+    public  Guerrier() {}
 
     /**
      * @param newAtk
      */
     @Override
     public void addAtk(int newAtk) {
-        if (getAttackLevel() < 10){
+//        int letAtk = Math.min( 10, getAttackLevel() + newAtk);
+//        setAttackLevel(letAtk);
+        if ((getAttackLevel() + newAtk) < 10){
             setAttackLevel(getAttackLevel() + newAtk);
-            if (getAttackLevel() >= 10){
-                setAttackLevel(10);
-            }
+        }else if ((getAttackLevel() + newAtk) >= 10){
+            setAttackLevel(10);
         }
     }
 
@@ -42,4 +45,6 @@ public class Guerrier extends Personnage {
     public String toString() {
         return super.toString();
     }
+
+
 }

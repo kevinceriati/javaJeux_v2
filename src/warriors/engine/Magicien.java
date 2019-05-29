@@ -2,15 +2,14 @@ package warriors.engine;
 
 public class Magicien extends Personnage {
 
-
     /**
      * @param name
      * @param image
      * @param life
      * @param attackLevel
      */
-    public Magicien (String name, String image, int life, int attackLevel) {
-       super(name, image, life,attackLevel);
+    public Magicien (String name, String type, String image, int attackLevel, int life) {
+       super(name, type, image, life,attackLevel);
     }
 
     /**

@@ -5,6 +5,7 @@ import warriors.contracts.Hero;
 abstract public class Personnage implements Hero, Cloneable {
 
     protected String name;
+    protected  String type;
     protected String image;
     protected int life;
     protected int attackLevel;
@@ -15,11 +16,15 @@ abstract public class Personnage implements Hero, Cloneable {
      * @param life
      * @param attackLevel
      */
-    public Personnage(String name, String image, int life, int attackLevel) {
+    public Personnage(String name, String type, String image, int life, int attackLevel) {
         this.name = name;
+        this.type = type;
         this.image = image;
         this.life = life;
         this.attackLevel = attackLevel;
+    }
+    public Personnage(){
+
     }
 
     /**
@@ -28,6 +33,14 @@ abstract public class Personnage implements Hero, Cloneable {
     @Override
     public String getName() {
         return this.name;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     /**
@@ -89,13 +102,12 @@ abstract public class Personnage implements Hero, Cloneable {
         this.attackLevel = attackLevel;
     }
 
-
     /**
      * @return
      */
     @Override
     public String toString() {
-        return "\n" + "Stat du Hero : " + "\n" + "Nom : " + getName() + "\n" + "Vie : " + getLife() + "\n" + "attaque : " + getAttackLevel();
+        return "\n" + "Stat du Hero : " + "\n" + "Nom : " + getName() + "\n" + "Vie : " + getLife() + "\n" + "attaque : " + getAttackLevel() + "\n";
     }
 
     @Override
